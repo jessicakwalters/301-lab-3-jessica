@@ -1,16 +1,22 @@
 function startApp() {
-  loadData('/data/page-1.json');
+  loadData('/data/page-1.json', imagesPage1);
   attachListeners();
   buttonListner();
 }
 
-function loadData(filePath) {
+function loadData(filePath, imagesArray) {
   $('#photo-template').siblings().remove();
   $.get(filePath, (images) => {
+    
     if(images.length){
-      // success function
-      console.log('loading');
-      displayPage(images);
+      images.forEach( (imageObject) => {
+        imagesArray.push(new Image(imageObject));
+      })
+      
+      imagesArray.forEach( (newImageObject) => {
+        $('main').append(newImageObject.tohtml());
+      })
+      //displayPage(images);
 
       createKeywords(images);
     }
@@ -22,17 +28,18 @@ function loadData(filePath) {
 }
 
 function displayPage(images) {
-  images.forEach( (image) => {
-    const $newImage = $('#photo-template').clone();
 
-    $newImage.find('h2').text(image.title);
-    $newImage.find('img').attr('src',image.image_url);
-    $newImage.find('p').text(image.keyword);
-    $newImage.find('img').attr('alt', image.description);
-    $newImage.removeAttr('id');
-    $newImage.show();
-    $('main').append($newImage);
-  })
+  // images.forEach( (image) => {
+  //   const $newImage = $('#photo-template').clone();
+
+  //   $newImage.find('h2').text(image.title);
+  //   $newImage.find('img').attr('src',image.image_url);
+  //   $newImage.find('p').text(image.keyword);
+  //   $newImage.find('img').attr('alt', image.description);
+  //   $newImage.removeAttr('id');
+  //   $newImage.show();
+  //   $('main').append($newImage);
+  //})
 }
 
 function createKeywords(images) {
@@ -99,11 +106,42 @@ function buttonListner() {
     $('section').hide();
     // grab value from button
     const $button = $(event.target);
+    const text = $button.text();
+    let arr;
+    //if text is page1 choose imagesPage1, if page2 choose imagesPage2
+    if (text == 'page1') {
+      arr = imagesPage1 ;
+    } else if (text == 'page2'){
+      arr= imagesPage2;
+    }
     const value = $button.val();
     // call load data
-    loadData(value);
+    loadData(value, arr);
   });
 }
+
+
+let imagesPage1 = [];
+let imagesPage2 = [];
+
+//constuctor
+function Image(rawDataObject) {
+    for (let key in rawDataObject) {
+        this[key] = rawDataObject[key];
+    }
+}
+
+Image.prototype.tohtml = function () {
+    //get templat
+    let template = $('#photo-template').html();
+    //handlebars compile
+    let templateRender = Handlebars.compile(template);
+    //return the html
+    return templateRender(this);
+}
+
+//we're going to have to grab the json from the $get in app.js
+
 
 
 $(startApp);
