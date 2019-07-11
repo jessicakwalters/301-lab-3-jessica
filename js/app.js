@@ -1,13 +1,17 @@
 function startApp() {
-  loadData();
+  loadData('/data/page-1.json');
   attachListeners();
+  buttonListner();
 }
 
-function loadData() {
-  $.get('/data/page-1.json', (images) => {
+function loadData(filePath) {
+  $('#photo-template').siblings().remove();
+  $.get(filePath, (images) => {
     if(images.length){
       // success function
+      console.log('loading');
       displayPage(images);
+
       createKeywords(images);
     }
     else{
@@ -26,12 +30,14 @@ function displayPage(images) {
     $newImage.find('p').text(image.keyword);
     $newImage.find('img').attr('alt', image.description);
     $newImage.removeAttr('id');
+    $newImage.show();
     $('main').append($newImage);
   })
 }
 
 function createKeywords(images) {
   let keywords = [];
+  $("#option-template").siblings().remove();
   //iterate over each item in the array
   images.forEach( (image) => {
     let currentKeyword = image.keyword;
@@ -86,10 +92,18 @@ function attachListeners() {
     }
   })
 }
-  
-  
-  
-  
+
+function buttonListner() {
+  $('button').on('click', (event) =>{
+    // hide section slements
+    $('section').hide();
+    // grab value from button
+    const $button = $(event.target);
+    const value = $button.val();
+    // call load data
+    loadData(value);
+  });
+}
 
 
 $(startApp);
