@@ -1,18 +1,18 @@
-section {
-  width: 20%;
-  height: 350px;
-  float: left;
-  margin: 2%;
-  overflow: auto;
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap; 
 }
 
-img {
-  width: 100%;
-  height: 200px;
+.flexitem {
+  margin: 20px;
 }
 
-footer {
-  float: left;
-  clear: both;
-  margin: 40px;
+img{
+  width: 250px;
+  height: 250px;
+}
+
+header {
+
 }

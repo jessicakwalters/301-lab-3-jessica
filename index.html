@@ -4,15 +4,16 @@
 <html>
   <head>
     <title>The Gallery of Horns</title>
-    <link href="css/layout.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script id="photo-template" type="text/x-handlebars-template">
-      <section id="photos">
+      <section class="flexitem">
         <h2>{{title}}</h2>
         <img src="{{image_url}}" alt="{{description}}">
         <p>{{keyword}}</p>
       </section>
     </script>
+    <link href="./css/reset.css">
+    <link href="./css/layout.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -24,11 +25,9 @@
       <button id="page2" type='button' value="/data/page-2.json">page2</button>
     </header>
     <main>
-      <!-- <section id="photo-template">
-        <h2></h2>
-        <img src="" alt="">
-        <p></p>
-      </section> -->
+      <section class="flexbox" id="container">
+      
+      </section>
     </main>
     <footer>
       &copy; 2018 Code Fellows

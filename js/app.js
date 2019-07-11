@@ -5,7 +5,7 @@ function startApp() {
 }
 
 function loadData(filePath, imagesArray) {
-  $('#photo-template').siblings().remove();
+  // $('.photos').siblings().remove();
   $.get(filePath, (images) => {
     
     if(images.length){
@@ -14,7 +14,8 @@ function loadData(filePath, imagesArray) {
       })
       
       imagesArray.forEach( (newImageObject) => {
-        $('main').append(newImageObject.tohtml());
+        $('#container').append(newImageObject.tohtml());
+        console.log(newImageObject);
       })
       //displayPage(images);
 
@@ -126,18 +127,18 @@ let imagesPage2 = [];
 
 //constuctor
 function Image(rawDataObject) {
-    for (let key in rawDataObject) {
-        this[key] = rawDataObject[key];
-    }
+  for (let key in rawDataObject) {
+    this[key] = rawDataObject[key];
+  }
 }
 
 Image.prototype.tohtml = function () {
-    //get templat
-    let template = $('#photo-template').html();
-    //handlebars compile
-    let templateRender = Handlebars.compile(template);
-    //return the html
-    return templateRender(this);
+  //get templat
+  let template = $('#photo-template').html();
+  //handlebars compile
+  let templateRender = Handlebars.compile(template);
+  //return the html
+  return templateRender(this);
 }
 
 //we're going to have to grab the json from the $get in app.js
