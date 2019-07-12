@@ -1,46 +1,40 @@
+
+let imagesPage1 = [];
+let imagesPage2 = [];
+
 function startApp() {
-  loadData('/data/page-1.json', imagesPage1);
+  createData('/data/page-2.json', imagesPage2);
+  createData('/data/page-1.json', imagesPage1);
   attachListeners();
   buttonListner();
 }
 
-function loadData(filePath, imagesArray) {
-  // $('.photos').siblings().remove();
+function createData(filePath, imagesArray) {
   $.get(filePath, (images) => {
-    
     if(images.length){
       images.forEach( (imageObject) => {
         imagesArray.push(new Image(imageObject));
       })
-      
-      imagesArray.forEach( (newImageObject) => {
-        $('#container').append(newImageObject.tohtml());
-        console.log(newImageObject);
-      })
-      //displayPage(images);
-
-      createKeywords(images);
     }
     else{
       //  faliure message
       console.log('error');
     }
-  },'json');
+  },'json')
+  .then( () => {
+  loadData(imagesArray);
+  });
 }
 
-function displayPage(images) {
-
-  // images.forEach( (image) => {
-  //   const $newImage = $('#photo-template').clone();
-
-  //   $newImage.find('h2').text(image.title);
-  //   $newImage.find('img').attr('src',image.image_url);
-  //   $newImage.find('p').text(image.keyword);
-  //   $newImage.find('img').attr('alt', image.description);
-  //   $newImage.removeAttr('id');
-  //   $newImage.show();
-  //   $('main').append($newImage);
-  //})
+function loadData(arr) {
+  //remove any children
+  $('#container').children().remove();
+  //append new objects
+  console.log("Array: ", arr);
+  arr.forEach( (image) => {
+    $('#container').append(image.tohtml());
+  })
+  createKeywords(arr);
 }
 
 function createKeywords(images) {
@@ -104,7 +98,7 @@ function attachListeners() {
 function buttonListner() {
   $('button').on('click', (event) =>{
     // hide section slements
-    $('section').hide();
+    $('.flexitem').hide();
     // grab value from button
     const $button = $(event.target);
     const text = $button.text();
@@ -115,15 +109,9 @@ function buttonListner() {
     } else if (text == 'page2'){
       arr= imagesPage2;
     }
-    const value = $button.val();
-    // call load data
-    loadData(value, arr);
+    loadData(arr);
   });
 }
-
-
-let imagesPage1 = [];
-let imagesPage2 = [];
 
 //constuctor
 function Image(rawDataObject) {
@@ -140,9 +128,5 @@ Image.prototype.tohtml = function () {
   //return the html
   return templateRender(this);
 }
-
-//we're going to have to grab the json from the $get in app.js
-
-
 
 $(startApp);
