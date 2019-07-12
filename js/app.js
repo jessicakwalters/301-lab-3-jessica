@@ -104,9 +104,9 @@ function buttonListner() {
     const text = $button.text();
     let arr;
     //if text is page1 choose imagesPage1, if page2 choose imagesPage2
-    if (text == 'page1') {
+    if (text == 'Page 1') {
       arr = imagesPage1 ;
-    } else if (text == 'page2'){
+    } else if (text == 'Page 2'){
       arr= imagesPage2;
     }
     loadData(arr);

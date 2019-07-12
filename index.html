@@ -12,10 +12,10 @@
         <p>{{keyword}}</p>
       </section>
     </script>
-    <link href="./css/reset.css" rel="stylesheet">
-    <link href="./css/base.css" rel="stylesheet">
-    <link href="./css/layout.css" rel="stylesheet">
-    <link href="./css/modules.css" rel="stylesheet">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/modules.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -23,8 +23,10 @@
       <select>
         <option id="option-template" value="default">Filter by Keyword</option>
       </select>
-      <button id="page1" type='button' value="/data/page-1.json">page1</button>
-      <button id="page2" type='button' value="/data/page-2.json">page2</button>
+      <div id="button">
+        <button id="page1" type='button' value="/data/page-1.json">Page 1</button>
+        <button id="page2" type='button' value="/data/page-2.json">Page 2</button>
+      </div>
     </header>
     <main>
       <div class="flexbox" id="container">
@@ -37,6 +39,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
-   <script src= "./js/app.js"></script>
+   <script src= "js/app.js"></script>
   </body>
 </html>
