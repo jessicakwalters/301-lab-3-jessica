@@ -7,6 +7,7 @@ function startApp() {
   createData('../data/page-1.json', imagesPage1);
   attachListeners();
   buttonListner();
+  radioListner();
 }
 
 function createData(filePath, imagesArray) {
@@ -111,6 +112,35 @@ function buttonListner() {
     }
     loadData(arr);
   });
+}
+
+function radioListner(){
+  $('#sort').click( (event) => {
+    const $radio = $(event.target);
+    const value = $radio.val();
+    console.log(value);
+    if(value == 'horns') {
+      sortByHorns(imagesPage1);
+      sortByHorns(imagesPage2);
+      loadData(imagesPage1);
+    } else if(value == 'title') {
+      sortByTitle(imagesPage1);
+      sortByTitle(imagesPage2);
+      loadData(imagesPage1);
+    }
+  })
+}
+
+function sortByHorns(arr){
+  arr.sort((a, b) => {
+    return a.horns - b.horns;
+  })
+}
+
+function sortByTitle(arr){
+  arr.sort((a, b) => {
+    return a.title.localeCompare(b.title);
+  })
 }
 
 //constuctor
