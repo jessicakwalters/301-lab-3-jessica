@@ -3,8 +3,8 @@ let imagesPage1 = [];
 let imagesPage2 = [];
 
 function startApp() {
-  createData('./../data/page-2.json', imagesPage2);
-  createData('./../data/page-1.json', imagesPage1);
+  createData('../data/page-2.json', imagesPage2);
+  createData('../data/page-1.json', imagesPage1);
   attachListeners();
   buttonListner();
   radioListner();
