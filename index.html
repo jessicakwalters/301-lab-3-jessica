@@ -12,8 +12,10 @@
         <p>{{keyword}}</p>
       </section>
     </script>
-    <link href="./css/reset.css">
-    <link href="./css/layout.css" rel="stylesheet">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/modules.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -21,13 +23,15 @@
       <select>
         <option id="option-template" value="default">Filter by Keyword</option>
       </select>
-      <button id="page1" type='button' value="/data/page-1.json">page1</button>
-      <button id="page2" type='button' value="/data/page-2.json">page2</button>
+      <div id="button">
+        <button id="page1" type='button' value="/data/page-1.json">Page 1</button>
+        <button id="page2" type='button' value="/data/page-2.json">Page 2</button>
+      </div>
     </header>
     <main>
-      <section class="flexbox" id="container">
+      <div class="flexbox" id="container">
       
-      </section>
+      </div>
     </main>
     <footer>
       &copy; 2018 Code Fellows
